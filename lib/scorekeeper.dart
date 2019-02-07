@@ -16,13 +16,14 @@ class ScoreKeeperState extends State<ScoreKeeper> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
            Container(
-             color: Colors.red,
+             color: Colors.purple,
              child:Column(
                children: <Widget>[
                  Text("Column Container 1"),
                ],
              )
            ),
+           Padding(padding: EdgeInsets.all(20),),
            Container(
              color: Colors.pink,
              child:Column(
