@@ -8,10 +8,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Tip Calculator',
+      title: 'Score Keeper',
       theme: new ThemeData(
         primaryColor: Colors.black,
-        fontFamily: "Satisfy"
       ),
       home: ScoreKeeper(),
     );

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\score_keeper\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\score_keeper\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
