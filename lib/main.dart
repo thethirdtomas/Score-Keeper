@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Score Keeper',
       theme: new ThemeData(
-        primaryColor: Colors.black,
+        primaryColor: Colors.white,
       ),
       home: ScoreKeeper(),
     );
