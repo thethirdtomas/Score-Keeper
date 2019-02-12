@@ -15,11 +15,6 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   final int maxPlayers = 100;
   List<Player> players = List();
 
-  ScoreKeeperState(){
-    players.add(Player("Player 1"));
-    players.add(Player("Player 2"));
-  }
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,19 +98,20 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   }
 
   Widget listItem(position){
+    Player p = players[position];
     return ListTile(
       title: ListTile(
         title: TextField(
           style: TextStyle(color: Colors.white70, fontSize: 20),
-          onChanged:(value) => savePlayerName(value,position),
+          onSubmitted:(value) => savePlayerName(value,position),
           decoration: InputDecoration(
-            hintText: "${players[position].getName()}",
+            hintText: "${p.getName()}",
             hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
             border: InputBorder.none,
           ),
         ),
         trailing: Text(
-          "${players[position].getScore()}",
+          "${p.getScore()}",
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
       ),
@@ -155,12 +151,6 @@ class ScoreKeeperState extends State<ScoreKeeper> {
       return;
 
     setState(() {
-      if(players.isEmpty)
-      {
-        players.add(Player("Player $position"));
-        players.add(Player("Player ${position+1}"));
-        return;
-      }
       players.add(Player("Player $position"));
     });
   }

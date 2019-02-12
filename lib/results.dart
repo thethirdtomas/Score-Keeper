@@ -43,7 +43,6 @@ class Results extends StatelessWidget{
             ),
             Expanded(
               child: ListView.builder(
-                
                 itemCount: players.length,
                 itemBuilder: (context, position){
                   return ListTile(
