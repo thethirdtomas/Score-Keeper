@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'player.dart';
 
 class ScoreKeeper extends StatefulWidget {
   @override
@@ -6,9 +7,9 @@ class ScoreKeeper extends StatefulWidget {
 }
 
 class ScoreKeeperState extends State<ScoreKeeper> {
-  int itemCount = 2;
-  final int maxPlayers = 10;
-
+  
+  List<Player> players = List();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,16 +38,16 @@ class ScoreKeeperState extends State<ScoreKeeper> {
                   IconButton(
                     icon: Icon(Icons.add, color: Colors.white70,),
                     iconSize: 30,
-                    onPressed: addPlayer,
+                    onPressed: () => addPlayer(players.length+1),
                   )
                 ],
               ),
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: itemCount,
+                itemCount: players.length,
                 itemBuilder: (context, position){
-                  return ListTileItem(position);
+                  return ListTileItem(players[position]);
                 },
               ),
             )
@@ -58,36 +59,33 @@ class ScoreKeeperState extends State<ScoreKeeper> {
 
   reset(){
     setState(() {
-     itemCount = 0;     
+      players.clear();
+          
     });
 
   }
 
-  addPlayer()
+  addPlayer(int position)
   {
-    if(itemCount == maxPlayers)
-      return;
     setState(() {
-     itemCount++;
+      players.add(Player("Player $position", 0));
     });
   }
 }
 
 class ListTileItem extends StatefulWidget {
-  int index;
-  ListTileItem(int index){
-    this.index = index;
+  Player player;
+  ListTileItem(Player player){
+    this.player = player;
   }
   @override
-  ListTileItemState createState() => ListTileItemState(index);
+  ListTileItemState createState() => ListTileItemState(player);
 }
 
 class ListTileItemState extends State<ListTileItem>{
-  int score = 0;
-  int playerNumber;
-
-  ListTileItemState(int index){
-    playerNumber = index+1;
+  Player player;
+  ListTileItemState(Player player){
+    this.player = player;
   }
 
   @override
@@ -96,15 +94,16 @@ class ListTileItemState extends State<ListTileItem>{
       title: ListTile(
         title: TextField(
           style: TextStyle(color: Colors.white70, fontSize: 20),
+          onChanged: savePlayerName,
           decoration: InputDecoration(
-            hintText: "Player $playerNumber",
+            hintText: "${player.getName()}",
             hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
             border: InputBorder.none,
         
           ),
         ),
         trailing: Text(
-          "$score",
+          "${player.getScore()}",
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
       ),
@@ -123,17 +122,19 @@ class ListTileItemState extends State<ListTileItem>{
     );
   }
   decScore(){
-    if(score == 0)
-      return;
     setState(() {
-    score--; 
+     player.decScore();
     });
   }
 
   incScore(){
     setState(() {
-     score++; 
+     player.incScore(); 
     });
+  }
+
+  savePlayerName(String value){
+    player.setName(value);
   }
 }
 
