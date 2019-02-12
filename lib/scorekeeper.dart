@@ -1,8 +1,7 @@
+import 'player_list.dart';
 import 'package:flutter/material.dart';
-import 'player.dart';
 import 'results.dart';
 import "package:flutter_slidable/flutter_slidable.dart";
-
 
 
 class ScoreKeeper extends StatefulWidget {
@@ -12,17 +11,11 @@ class ScoreKeeper extends StatefulWidget {
 
 class ScoreKeeperState extends State<ScoreKeeper> {
 
-  final int maxPlayers = 100;
-  List<Player> players = List();
-  List<TextEditingController> ctr = List();
+  PlayerList players; 
 
-  ScoreKeeperState(){
-    players.add(Player("Player 1"));
-    players.add(Player("Player 2"));
-    ctr.add(TextEditingController());
-    ctr.add(TextEditingController());
-  }
-
+  ScoreKeeperState() {
+    players = PlayerList();
+  } 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +56,7 @@ class ScoreKeeperState extends State<ScoreKeeper> {
                       IconButton(
                         icon: Icon(Icons.add, color: Colors.white70,),
                         iconSize: 30,
-                        onPressed: () => addPlayer(players.length+1),
+                        onPressed: addPlayer,
                      ),
                     ],
                   ),
@@ -72,7 +65,7 @@ class ScoreKeeperState extends State<ScoreKeeper> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: players.length,
+                itemCount: players.size(),
                 itemBuilder: (context, position){
                   return Slidable(
                     delegate: SlidableDrawerDelegate(),
@@ -90,7 +83,7 @@ class ScoreKeeperState extends State<ScoreKeeper> {
                         caption: "Delete",
                         color: Colors.red,
                         icon: Icons.delete,
-                        onTap:() => deletePlayer(position),
+                        onTap:() => removePlayer(position),
                       )
                     ],
                     child: listItem(position)
@@ -106,28 +99,21 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   }
 
   Widget listItem(position){
-    Player p = players[position];
     return ListTile(
       title: ListTile(
         title: TextField(
-          controller: ctr[position],
+          controller: players.getCtr(position),
           style: TextStyle(color: Colors.white70, fontSize: 20),
           onChanged:(value) => savePlayerName(value,position),
-          onSubmitted: (value){
-            setState(() {
-             for(TextEditingController x in ctr){
-               x.clear();
-             } 
-            });
-          },
+          onSubmitted: (value) => flush,
           decoration: InputDecoration(
-            hintText: "${p.getName()}",
+            hintText: "${players.getName(position)}",
             hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
             border: InputBorder.none,
           ),
         ),
         trailing: Text(
-          "${p.getScore()}",
+          "${players.getScore(position)}",
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
       ),
@@ -150,55 +136,51 @@ class ScoreKeeperState extends State<ScoreKeeper> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Results(players),
+        builder: (context) => Results(PlayerList.clone(players)),
       )
     );
   }
 
   reset(){
     setState(() {
-      players.clear();
-      players.add(Player("Player 1"));
-      players.add(Player("Player 2"));
-      ctr.add(TextEditingController());
-      ctr.add(TextEditingController());
+      players = PlayerList();
     });
   }
 
-  addPlayer(int position)
-  {
-    if(players.length >= maxPlayers)
-      return;
-
+  addPlayer() {
     setState(() {
-      players.add(Player("Player $position"));
-      ctr.add(TextEditingController());
+     players.addPlayer(); 
     });
   }
-  deletePlayer(int position){
+  removePlayer(int index){
     setState(() {
-     players.removeAt(position); 
-     ctr.removeAt(position);
+     players.removePlayer(index);
     });
   }
-  resetPlayer(int position){
+  resetPlayer(int index){
     setState(() {
-     players[position].reset(); 
+     players.resetPlayer(index);
     });
   }
-  decScore(int position){
+  decScore(int index){
     setState(() {
-     players[position].decScore();
+     players.decScore(index);
     });
   }
 
-  incScore(int position){
+  incScore(int index){
     setState(() {
-     players[position].incScore(); 
+     players.incScore(index);
     });
   }
 
-  savePlayerName(String value, int position){
-    players[position].setName(value);
+  savePlayerName(String name, int index){
+    players.savePlayerName(name, index);
+  }
+  
+  flush(){
+    setState(() {
+     players.flush(); 
+    });
   }
 }

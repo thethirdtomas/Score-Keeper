@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'player.dart';
+import 'player_list.dart';
 
 class Results extends StatelessWidget{
-  List<Player>players;
+  PlayerList players;
    @override
-  Results(List<Player>players){
-    this.players = players;
-    this.players.sort((a, b) => b.getScore().compareTo(a.getScore()));
+  Results(this.players){
+    players.sort();
   }
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +42,7 @@ class Results extends StatelessWidget{
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: players.length,
+                itemCount: players.size(),
                 itemBuilder: (context, position){
                   return ListTile(
                     leading: Text(
@@ -51,11 +50,11 @@ class Results extends StatelessWidget{
                       style: TextStyle(color: Colors.white, fontSize: 35)
                       ),
                     trailing: Text(
-                      "${players[position].getScore()}",
+                      "${players.getScore(position)}",
                       style: TextStyle(color: Colors.white, fontSize: 30)
                       ),
                     title: Text(
-                      "${players[position].getName()}",
+                      "${players.getName(position)}",
                       style: TextStyle(color: Colors.white70, fontSize: 25)
                       ),
                   );
