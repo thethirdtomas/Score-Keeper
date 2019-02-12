@@ -14,6 +14,14 @@ class ScoreKeeperState extends State<ScoreKeeper> {
 
   final int maxPlayers = 100;
   List<Player> players = List();
+  List<TextEditingController> ctr = List();
+
+  ScoreKeeperState(){
+    players.add(Player("Player 1"));
+    players.add(Player("Player 2"));
+    ctr.add(TextEditingController());
+    ctr.add(TextEditingController());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +110,16 @@ class ScoreKeeperState extends State<ScoreKeeper> {
     return ListTile(
       title: ListTile(
         title: TextField(
+          controller: ctr[position],
           style: TextStyle(color: Colors.white70, fontSize: 20),
-          onSubmitted:(value) => savePlayerName(value,position),
+          onChanged:(value) => savePlayerName(value,position),
+          onSubmitted: (value){
+            setState(() {
+             for(TextEditingController x in ctr){
+               x.clear();
+             } 
+            });
+          },
           decoration: InputDecoration(
             hintText: "${p.getName()}",
             hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
@@ -142,6 +158,10 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   reset(){
     setState(() {
       players.clear();
+      players.add(Player("Player 1"));
+      players.add(Player("Player 2"));
+      ctr.add(TextEditingController());
+      ctr.add(TextEditingController());
     });
   }
 
@@ -152,11 +172,13 @@ class ScoreKeeperState extends State<ScoreKeeper> {
 
     setState(() {
       players.add(Player("Player $position"));
+      ctr.add(TextEditingController());
     });
   }
   deletePlayer(int position){
     setState(() {
      players.removeAt(position); 
+     ctr.removeAt(position);
     });
   }
   resetPlayer(int position){
@@ -177,8 +199,6 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   }
 
   savePlayerName(String value, int position){
-    setState(() {
-      players[position].setName(value);
-    });
+    players[position].setName(value);
   }
 }
