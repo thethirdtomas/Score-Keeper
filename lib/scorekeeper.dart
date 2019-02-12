@@ -9,6 +9,7 @@ class ScoreKeeper extends StatefulWidget {
 class ScoreKeeperState extends State<ScoreKeeper> {
   
   List<Player> players = List();
+  final int maxPlayers = 100;
   
   @override
   Widget build(BuildContext context) {
@@ -67,9 +68,9 @@ class ScoreKeeperState extends State<ScoreKeeper> {
 
   addPlayer(int position)
   {
-    if(players.length > 99)
+    if(players.length >= maxPlayers)
       return;
-      
+
     setState(() {
       players.add(Player("Player $position", 0));
     });
