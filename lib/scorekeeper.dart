@@ -91,6 +91,7 @@ class ScoreKeeperState extends State<ScoreKeeper> {
                       )
                     ],
                     child: listItem(position)
+                    
                   );
                 },
               ),
@@ -186,6 +187,8 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   }
 
   savePlayerName(String value, int position){
-    players[position].setName(value);
+    setState(() {
+      players[position].setName(value);
+    });
   }
 }

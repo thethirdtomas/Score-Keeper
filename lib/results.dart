@@ -68,8 +68,4 @@ class Results extends StatelessWidget{
       )
     );
   }
-
-  void sort(){
-    players.sort();
-  }
 }
