@@ -67,6 +67,9 @@ class ScoreKeeperState extends State<ScoreKeeper> {
 
   addPlayer(int position)
   {
+    if(players.length > 99)
+      return;
+      
     setState(() {
       players.add(Player("Player $position", 0));
     });
