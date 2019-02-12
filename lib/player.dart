@@ -1,10 +1,9 @@
 class Player{
-  
+
   String _name;
   int _score;
 
-  Player(String _name){
-    this._name = _name;
+  Player(this._name){
     this._score = 0;
   }
   String getName(){
@@ -25,5 +24,8 @@ class Player{
     if(_score == 0)
       return;
     _score--;
+  }
+  void reset(){
+    _score = 0;
   }
 }

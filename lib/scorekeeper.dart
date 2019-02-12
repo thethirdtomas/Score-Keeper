@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'player.dart';
 import 'results.dart';
+import "package:flutter_slidable/flutter_slidable.dart";
+
+
 
 class ScoreKeeper extends StatefulWidget {
   @override
@@ -8,9 +11,9 @@ class ScoreKeeper extends StatefulWidget {
 }
 
 class ScoreKeeperState extends State<ScoreKeeper> {
-  
-  List<Player> players = List();
+
   final int maxPlayers = 100;
+  List<Player> players = List();
 
   ScoreKeeperState(){
     players.add(Player("Player 1"));
@@ -68,12 +71,64 @@ class ScoreKeeperState extends State<ScoreKeeper> {
               child: ListView.builder(
                 itemCount: players.length,
                 itemBuilder: (context, position){
-                  return ListTileItem(players[position]);
+                  return Slidable(
+                    delegate: SlidableDrawerDelegate(),
+                    actionExtentRatio: 0.25,
+                    actions: <Widget>[
+                      IconSlideAction(
+                        caption: "Reset",
+                        color: Colors.blueAccent,
+                        icon: Icons.restore,
+                        onTap: () => resetPlayer(position),
+                      )
+                    ],
+                    secondaryActions: <Widget>[
+                      IconSlideAction(
+                        caption: "Delete",
+                        color: Colors.red,
+                        icon: Icons.delete,
+                        onTap:() => deletePlayer(position),
+                      )
+                    ],
+                    child: listItem(position)
+                  );
                 },
               ),
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget listItem(position){
+    return ListTile(
+      title: ListTile(
+        title: TextField(
+          style: TextStyle(color: Colors.white70, fontSize: 20),
+          onChanged:(value) => savePlayerName(value,position),
+          decoration: InputDecoration(
+            hintText: "${players[position].getName()}",
+            hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
+            border: InputBorder.none,
+          ),
+        ),
+        trailing: Text(
+          "${players[position].getScore()}",
+          style: TextStyle(color: Colors.white, fontSize: 30),
+        ),
+      ),
+      leading: IconButton(
+        icon: Icon(Icons.remove_circle_outline, color: Colors.white70),
+        iconSize: 50,
+        color: Colors.white70,
+        onPressed:()=> decScore(position),
+      ),
+      trailing: IconButton(
+        icon: Icon(Icons.add_circle_outline, color: Colors.white70),
+        iconSize: 50,
+        color: Colors.white70,
+        onPressed: ()=> incScore(position),
       ),
     );
   }
@@ -108,70 +163,29 @@ class ScoreKeeperState extends State<ScoreKeeper> {
       players.add(Player("Player $position"));
     });
   }
-}
-
-class ListTileItem extends StatefulWidget {
-  Player player;
-  ListTileItem(Player player){
-    this.player = player;
-  }
-  @override
-  ListTileItemState createState() => ListTileItemState(player);
-}
-
-class ListTileItemState extends State<ListTileItem>{
-  Player player;
-  ListTileItemState(Player player){
-    this.player = player;
-  }
-
-  @override
-  Widget build(BuildContext context){
-    return  ListTile(
-      title: ListTile(
-        title: TextField(
-          style: TextStyle(color: Colors.white70, fontSize: 20),
-          onChanged: savePlayerName,
-          decoration: InputDecoration(
-            hintText: "${player.getName()}",
-            hintStyle: TextStyle(color: Colors.white70, fontSize: 20),
-            border: InputBorder.none,
-        
-          ),
-        ),
-        trailing: Text(
-          "${player.getScore()}",
-          style: TextStyle(color: Colors.white, fontSize: 30),
-        ),
-      ),
-      leading: IconButton(
-        icon: Icon(Icons.remove_circle_outline, color: Colors.white70),
-        iconSize: 50,
-        color: Colors.white70,
-        onPressed: decScore,
-      ),
-      trailing: IconButton(
-        icon: Icon(Icons.add_circle_outline, color: Colors.white70),
-        iconSize: 50,
-        color: Colors.white70,
-        onPressed: incScore,
-      ),
-    );
-  }
-  decScore(){
+  deletePlayer(int position){
     setState(() {
-     player.decScore();
+     players.removeAt(position); 
+    });
+  }
+  resetPlayer(int position){
+    setState(() {
+     players[position].reset(); 
+    });
+  }
+  decScore(int position){
+    setState(() {
+     players[position].decScore();
     });
   }
 
-  incScore(){
+  incScore(int position){
     setState(() {
-     player.incScore(); 
+     players[position].incScore(); 
     });
   }
 
-  savePlayerName(String value){
-    player.setName(value);
+  savePlayerName(String value, int position){
+    players[position].setName(value);
   }
 }
-
