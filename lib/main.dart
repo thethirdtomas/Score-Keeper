@@ -12,7 +12,11 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primaryColor: Colors.white,
       ),
-      home: ScoreKeeper(),
+
+      routes: {
+        '/': (context) =>ScoreKeeper()
+      },
+      initialRoute: '/',
     );
   }
 }

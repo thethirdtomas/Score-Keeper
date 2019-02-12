@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'player.dart';
+import 'results.dart';
 
 class ScoreKeeper extends StatefulWidget {
   @override
@@ -10,6 +11,11 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   
   List<Player> players = List();
   final int maxPlayers = 100;
+
+  ScoreKeeperState(){
+    players.add(Player("Player 1"));
+    players.add(Player("Player 2"));
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -29,18 +35,32 @@ class ScoreKeeperState extends State<ScoreKeeper> {
             Container(
               margin: EdgeInsets.only(left: 10, right: 10, top:30, bottom: 0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.settings_backup_restore,color: Colors.white70), 
-                    iconSize: 30,
-                    onPressed: reset,
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.format_list_numbered,color: Colors.white70), 
+                        iconSize: 30,
+                        onPressed: results,
+                      ),
+                    ],
                   ),
-                  IconButton(
-                    icon: Icon(Icons.add, color: Colors.white70,),
-                    iconSize: 30,
-                    onPressed: () => addPlayer(players.length+1),
-                  )
+                  //Text("Score Keeper", style: TextStyle(fontSize: 20,color: Colors.white70)),
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.settings_backup_restore,color: Colors.white70), 
+                        iconSize: 30,
+                        onPressed: reset,
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add, color: Colors.white70,),
+                        iconSize: 30,
+                        onPressed: () => addPlayer(players.length+1),
+                     ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -58,12 +78,19 @@ class ScoreKeeperState extends State<ScoreKeeper> {
     );
   }
 
+  results(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Results(players),
+      )
+    );
+  }
+
   reset(){
     setState(() {
       players.clear();
-          
     });
-
   }
 
   addPlayer(int position)
@@ -72,7 +99,13 @@ class ScoreKeeperState extends State<ScoreKeeper> {
       return;
 
     setState(() {
-      players.add(Player("Player $position", 0));
+      if(players.isEmpty)
+      {
+        players.add(Player("Player $position"));
+        players.add(Player("Player ${position+1}"));
+        return;
+      }
+      players.add(Player("Player $position"));
     });
   }
 }

@@ -3,9 +3,9 @@ class Player{
   String _name;
   int _score;
 
-  Player(String _name, int _score){
+  Player(String _name){
     this._name = _name;
-    this._score = _score;
+    this._score = 0;
   }
   String getName(){
     return _name;
