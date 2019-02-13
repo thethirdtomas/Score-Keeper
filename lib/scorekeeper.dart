@@ -12,6 +12,7 @@ class ScoreKeeper extends StatefulWidget {
 class ScoreKeeperState extends State<ScoreKeeper> {
 
   PlayerList players; 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   ScoreKeeperState() {
     players = PlayerList();
@@ -19,6 +20,7 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -132,6 +134,24 @@ class ScoreKeeperState extends State<ScoreKeeper> {
     );
   }
 
+  void _alert(String value, int time){
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("$value"),
+      duration: Duration(milliseconds:time),
+    ),);
+  }
+
+  void _undoAlert(String value, int type){
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("$value"),
+      action: SnackBarAction(
+        label: 'undo',
+        onPressed: type == 0 ? undoPlayer : undoScore,
+        
+      ),
+    ),);
+  }
+
   results(){
     Navigator.push(
       context,
@@ -144,33 +164,51 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   reset(){
     setState(() {
       players = PlayerList();
+      _alert("scorekeeper reset", 1000);
     });
   }
 
   addPlayer() {
     setState(() {
-     players.addPlayer(); 
+      if(players.addPlayer()){
+        _alert("new player added", 250);
+      }
+      else{
+        _alert("${PlayerList.maxPlayers} player maximum", 1000);
+      }
     });
   }
   removePlayer(int index){
+    String name = players.getName(index);
     setState(() {
-     players.removePlayer(index);
+      if(players.removePlayer(index)){
+         _undoAlert("$name removed", 0);
+      }
+      else{
+        _alert("${PlayerList.minPlayers} player minimum", 1000);
+      }
     });
   }
   resetPlayer(int index){
+    String name = players.getName(index);
     setState(() {
      players.resetPlayer(index);
+     _undoAlert("$name's score reset", 1);
     });
   }
   decScore(int index){
     setState(() {
-     players.decScore(index);
+     if(!players.decScore(index)){
+       _alert("minimum score ${PlayerList.minScore}", 1000);
+     }
     });
   }
 
   incScore(int index){
     setState(() {
-     players.incScore(index);
+     if(!players.incScore(index)){
+       _alert("maximum score ${PlayerList.maxScore}", 1000);
+     }
     });
   }
 
@@ -181,6 +219,18 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   flush(){
     setState(() {
      players.flush(); 
+    });
+  }
+
+  undoPlayer(){
+    setState(() {
+     players.undoPlayer(); 
+    });
+  }
+
+  undoScore(){
+    setState(() {
+     players.undoResetPlayer(); 
     });
   }
 }
