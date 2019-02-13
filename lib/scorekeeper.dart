@@ -12,6 +12,7 @@ class ScoreKeeper extends StatefulWidget {
 class ScoreKeeperState extends State<ScoreKeeper> {
 
   PlayerList players; 
+  PlayerList trash; 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   ScoreKeeperState() {
@@ -146,7 +147,14 @@ class ScoreKeeperState extends State<ScoreKeeper> {
       content: Text("$value"),
       action: SnackBarAction(
         label: 'undo',
-        onPressed: type == 0 ? undoPlayer : undoScore,
+        onPressed: (){
+          if(type == 0)
+            undoPlayer();
+          else if(type == 1)
+            undoScore();
+          else if(type == 2)
+            undoList();
+        },
         
       ),
     ),);
@@ -163,8 +171,9 @@ class ScoreKeeperState extends State<ScoreKeeper> {
 
   reset(){
     setState(() {
+      trash = players;
       players = PlayerList();
-      _alert("scorekeeper reset", 1000);
+      _undoAlert("scorekeeper reset", 2);
     });
   }
 
@@ -231,6 +240,12 @@ class ScoreKeeperState extends State<ScoreKeeper> {
   undoScore(){
     setState(() {
      players.undoResetPlayer(); 
+    });
+  }
+
+  undoList(){
+    setState(() {
+     players = trash; 
     });
   }
 }
