@@ -1,26 +1,34 @@
 [
     {
-        "merged": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\drawable_favicon.png.flat",
+        "source": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\android\\app\\src\\main\\res\\drawable\\favicon.png"
     },
     {
-        "merged": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\drawable_launch_background.xml.flat",
-        "source": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\android\\app\\src\\main\\res\\drawable\\launch_background.xml"
+        "merged": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\drawable_launch_background.xml.flat",
+        "source": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\android\\app\\src\\main\\res\\drawable\\launch_background.xml"
     },
     {
-        "merged": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\tomas\\Desktop\\Flutter\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\drawable_background_color.xml.flat",
+        "source": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\android\\app\\src\\main\\res\\drawable\\background_color.xml"
+    },
+    {
+        "merged": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\tomas\\Desktop\\Score-Keeper\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     }
 ]

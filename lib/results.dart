@@ -19,49 +19,51 @@ class Results extends StatelessWidget{
             tileMode: TileMode.repeated,
           )
         ),
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: 10, right: 10, top:30, bottom: 0),
-              child: Row(
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.white70), 
-                    iconSize: 30,
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                  Text(
-                    "Results",
-                    style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white70,
+        child: SafeArea(
+                  child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(left: 10, right: 10, top:30, bottom: 0),
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.arrow_back, color: Colors.white70), 
+                      iconSize: 30,
+                      onPressed: () => Navigator.pop(context),
                     ),
-                  )
-                ],
-              )
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: players.size(),
-                itemBuilder: (context, position){
-                  return ListTile(
-                    leading: Text(
-                      "${position+1}.",
-                      style: TextStyle(color: Colors.white, fontSize: 35)
+                    Text(
+                      "Results",
+                      style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white70,
                       ),
-                    trailing: Text(
-                      "${players.getScore(position)}",
-                      style: TextStyle(color: Colors.white, fontSize: 30)
-                      ),
-                    title: Text(
-                      "${players.getName(position)}",
-                      style: TextStyle(color: Colors.white70, fontSize: 25)
-                      ),
-                  );
-                },
+                    )
+                  ],
+                )
               ),
-            )
-          ],
+              Expanded(
+                child: ListView.builder(
+                  itemCount: players.size(),
+                  itemBuilder: (context, position){
+                    return ListTile(
+                      leading: Text(
+                        "${position+1}.",
+                        style: TextStyle(color: Colors.white, fontSize: 35)
+                        ),
+                      trailing: Text(
+                        "${players.getScore(position)}",
+                        style: TextStyle(color: Colors.white, fontSize: 30)
+                        ),
+                      title: Text(
+                        "${players.getName(position)}",
+                        style: TextStyle(color: Colors.white70, fontSize: 25)
+                        ),
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       )
     );

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class PlayerList{
   static int maxPlayers = 100;
   static int minPlayers = 2;
-  static int maxScore = 100;
-  static int minScore = 0;
+  static int maxScore = 999;
+  static int minScore = -999;
   List<Player> _players = List();
 
   //undos

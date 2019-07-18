@@ -24,8 +24,8 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:debuggable="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="score_keeper" >
+        android:icon="@drawable/favicon"
+        android:label="scorekeeper" >
         <activity
             android:name="com.example.scorekeeper.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"

@@ -32,70 +32,72 @@ class ScoreKeeperState extends State<ScoreKeeper> {
             tileMode: TileMode.repeated,
           )
         ),
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: 10, right: 10, top:30, bottom: 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.format_list_numbered,color: Colors.white70), 
-                        iconSize: 30,
-                        onPressed: results,
-                      ),
-                    ],
-                  ),
-                  //Text("Score Keeper", style: TextStyle(fontSize: 20,color: Colors.white70)),
-                  Row(
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.settings_backup_restore,color: Colors.white70), 
-                        iconSize: 30,
-                        onPressed: reset,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.add, color: Colors.white70,),
-                        iconSize: 30,
-                        onPressed: addPlayer,
-                     ),
-                    ],
-                  ),
-                ],
+        child: SafeArea(
+                  child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(left: 10, right: 10, top:30, bottom: 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.format_list_numbered,color: Colors.white70), 
+                          iconSize: 30,
+                          onPressed: results,
+                        ),
+                      ],
+                    ),
+                    //Text("Score Keeper", style: TextStyle(fontSize: 20,color: Colors.white70)),
+                    Row(
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.settings_backup_restore,color: Colors.white70), 
+                          iconSize: 30,
+                          onPressed: reset,
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.add, color: Colors.white70,),
+                          iconSize: 30,
+                          onPressed: addPlayer,
+                       ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: players.size(),
-                itemBuilder: (context, position){
-                  return Slidable(
-                    delegate: SlidableDrawerDelegate(),
-                    actionExtentRatio: 0.25,
-                    actions: <Widget>[
-                      IconSlideAction(
-                        caption: "Reset",
-                        color: Colors.blueAccent,
-                        icon: Icons.restore,
-                        onTap: () => resetPlayer(position),
-                      )
-                    ],
-                    secondaryActions: <Widget>[
-                      IconSlideAction(
-                        caption: "Delete",
-                        color: Colors.red,
-                        icon: Icons.delete,
-                        onTap:() => removePlayer(position),
-                      )
-                    ],
-                    child: listItem(position)
-                    
-                  );
-                },
-              ),
-            )
-          ],
+              Expanded(
+                child: ListView.builder(
+                  itemCount: players.size(),
+                  itemBuilder: (context, position){
+                    return Slidable(
+                      delegate: SlidableDrawerDelegate(),
+                      actionExtentRatio: 0.25,
+                      actions: <Widget>[
+                        IconSlideAction(
+                          caption: "Reset",
+                          color: Colors.blueAccent,
+                          icon: Icons.restore,
+                          onTap: () => resetPlayer(position),
+                        )
+                      ],
+                      secondaryActions: <Widget>[
+                        IconSlideAction(
+                          caption: "Delete",
+                          color: Colors.red,
+                          icon: Icons.delete,
+                          onTap:() => removePlayer(position),
+                        )
+                      ],
+                      child: listItem(position)
+                      
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
